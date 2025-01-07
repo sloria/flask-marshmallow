@@ -48,7 +48,10 @@ class TestSQLAlchemy:
 
     @pytest.fixture
     def db(self, extapp):
-        return extapp.extensions["sqlalchemy"]
+        db = extapp.extensions["sqlalchemy"]
+        yield db
+        db.session.close()
+        db.engine.dispose()
 
     @pytest.fixture
     def extma(self, extapp):

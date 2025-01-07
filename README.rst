@@ -2,7 +2,7 @@
 Flask-Marshmallow
 *****************
 
-|pypi-package| |build-status| |docs| |marshmallow3|
+|pypi-package| |build-status| |docs| |marshmallow-support|
 
 Flask + marshmallow for beautiful APIs
 ======================================
@@ -45,9 +45,8 @@ Define your output format with marshmallow.
 
 
     class UserSchema(ma.Schema):
-        class Meta:
-            # Fields to expose
-            fields = ("email", "date_created", "_links")
+        email = ma.Email()
+        date_created = ma.DateTime()
 
         # Smart hyperlinking
         _links = ma.Hyperlinks(
@@ -127,6 +126,6 @@ MIT licensed. See the bundled `LICENSE <https://github.com/marshmallow-code/flas
    :target: https://flask-marshmallow.readthedocs.io/
    :alt: Documentation
 
-.. |marshmallow3| image:: https://badgen.net/badge/marshmallow/3
+.. |marshmallow-support| image:: https://badgen.net/badge/marshmallow/3,4?list=1
     :target: https://marshmallow.readthedocs.io/en/latest/upgrading.html
-    :alt: marshmallow 3 compatible
+    :alt: marshmallow 3|4 compatible

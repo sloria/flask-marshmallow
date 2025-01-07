@@ -49,9 +49,8 @@ Define your output format with marshmallow.
 
 
     class UserSchema(ma.Schema):
-        class Meta:
-            # Fields to expose
-            fields = ("email", "date_created", "_links")
+        email = ma.Email()
+        date_created = ma.DateTime()
 
         # Smart hyperlinking
         _links = ma.Hyperlinks(

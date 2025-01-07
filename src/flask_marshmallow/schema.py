@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import typing
 
 import flask
@@ -14,8 +16,8 @@ class Schema(ma.Schema):
     """
 
     def jsonify(
-        self, obj: typing.Any, many: typing.Optional[bool] = None, *args, **kwargs
-    ) -> "Response":
+        self, obj: typing.Any, many: bool | None = None, *args, **kwargs
+    ) -> Response:
         """Return a JSON response containing the serialized data.
 
 

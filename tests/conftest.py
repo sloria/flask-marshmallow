@@ -84,9 +84,8 @@ def ma(app):
 @pytest.fixture
 def schemas(ma):
     class AuthorSchema(ma.Schema):
-        class Meta:
-            fields = ("id", "name", "absolute_url", "links")
-
+        id = ma.Integer()
+        name = ma.String()
         absolute_url = ma.AbsoluteURLFor("author", values={"id": "<id>"})
 
         links = ma.Hyperlinks(
@@ -97,9 +96,8 @@ def schemas(ma):
         )
 
     class BookSchema(ma.Schema):
-        class Meta:
-            fields = ("id", "title", "author", "links")
-
+        id = ma.Integer()
+        title = ma.String()
         author = ma.Nested(AuthorSchema)
 
         links = ma.Hyperlinks(

@@ -9,7 +9,15 @@ with your Flask application.
 import typing
 import warnings
 
-from marshmallow import exceptions, pprint
+from marshmallow import exceptions
+
+try:
+    # Available in marshmallow 3 only
+    from marshmallow import pprint  # noqa: F401
+except ImportError:
+    _has_pprint = False
+else:
+    _has_pprint = True
 from marshmallow import fields as base_fields
 
 from . import fields
@@ -41,8 +49,9 @@ __all__ = [
     "Schema",
     "fields",
     "exceptions",
-    "pprint",
 ]
+if _has_pprint:
+    __all__.append("pprint")
 
 EXTENSION_NAME = "flask-marshmallow"
 
@@ -75,9 +84,8 @@ class Marshmallow:
     You can declare schema like so::
 
         class BookSchema(ma.Schema):
-            class Meta:
-                fields = ("id", "title", "author", "links")
-
+            id = ma.Integer(dump_only=True)
+            title = ma.String(required=True)
             author = ma.Nested(AuthorSchema)
 
             links = ma.Hyperlinks(

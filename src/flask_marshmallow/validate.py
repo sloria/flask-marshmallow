@@ -5,6 +5,8 @@ flask_marshmallow.validate
 Custom validation classes for various types of data.
 """
 
+from __future__ import annotations
+
 import io
 import os
 import re
@@ -91,11 +93,11 @@ class FileSize(Validator):
 
     def __init__(
         self,
-        min: typing.Optional[str] = None,
-        max: typing.Optional[str] = None,
+        min: str | None = None,
+        max: str | None = None,
         min_inclusive: bool = True,
         max_inclusive: bool = True,
-        error: typing.Optional[str] = None,
+        error: str | None = None,
     ):
         self.min = min
         self.max = max
@@ -171,7 +173,7 @@ class FileType(Validator):
     def __init__(
         self,
         accept: typing.Iterable[str],
-        error: typing.Optional[str] = None,
+        error: str | None = None,
     ):
         self.allowed_types = {ext.lower() for ext in accept}
         self.error = error or self.default_message

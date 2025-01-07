@@ -6,8 +6,8 @@ Changelog
 
 Support:
 
-* Support Python 3.9-3.13.
-* Support marshmallow 4.0.0.
+* Support Python 3.9-3.13 (:pr:`347`).
+* Support marshmallow 4.0.0 (:pr:`347`).
 
 1.2.1 (2024-03-18)
 ******************

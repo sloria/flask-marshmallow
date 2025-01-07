@@ -8,6 +8,8 @@ Integration with Flask-SQLAlchemy and marshmallow-sqlalchemy. Provides
 that use the scoped session from Flask-SQLAlchemy.
 """
 
+from __future__ import annotations
+
 from urllib import parse
 
 import marshmallow_sqlalchemy as msqla

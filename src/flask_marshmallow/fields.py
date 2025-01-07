@@ -8,6 +8,8 @@ See the `marshmallow.fields` module for the list of all fields available from th
 marshmallow library.
 """
 
+from __future__ import annotations
+
 import re
 import typing
 from collections.abc import Sequence
@@ -29,7 +31,7 @@ __all__ = [
 _tpl_pattern = re.compile(r"\s*<\s*(\S*)\s*>\s*")
 
 
-def _tpl(val: str) -> typing.Optional[str]:
+def _tpl(val: str) -> str | None:
     """Return value within ``< >`` if possible, else return ``None``."""
     match = _tpl_pattern.match(val)
     if match:
@@ -95,7 +97,7 @@ class URLFor(fields.Field):
     def __init__(
         self,
         endpoint: str,
-        values: typing.Optional[typing.Dict[str, typing.Any]] = None,
+        values: dict[str, typing.Any] | None = None,
         **kwargs,
     ):
         self.endpoint = endpoint
@@ -133,7 +135,7 @@ class AbsoluteURLFor(URLFor):
     def __init__(
         self,
         endpoint: str,
-        values: typing.Optional[typing.Dict[str, typing.Any]] = None,
+        values: dict[str, typing.Any] | None = None,
         **kwargs,
     ):
         if values:
@@ -146,9 +148,7 @@ class AbsoluteURLFor(URLFor):
 AbsoluteUrlFor = AbsoluteURLFor
 
 
-def _rapply(
-    d: typing.Union[dict, typing.Iterable], func: typing.Callable, *args, **kwargs
-):
+def _rapply(d: dict | typing.Iterable, func: typing.Callable, *args, **kwargs):
     """Apply a function to all values in a dictionary or
     list of dictionaries, recursively.
     """
@@ -201,7 +201,7 @@ class Hyperlinks(fields.Field):
 
     _CHECK_ATTRIBUTE = False
 
-    def __init__(self, schema: typing.Dict[str, typing.Union[URLFor, str]], **kwargs):
+    def __init__(self, schema: dict[str, URLFor | str], **kwargs):
         self.schema = schema
         fields.Field.__init__(self, **kwargs)
 
@@ -229,8 +229,8 @@ class File(fields.Field):
     def deserialize(
         self,
         value: typing.Any,
-        attr: typing.Optional[str] = None,
-        data: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        attr: str | None = None,
+        data: typing.Mapping[str, typing.Any] | None = None,
         **kwargs,
     ):
         if isinstance(value, Sequence) and len(value) == 0:

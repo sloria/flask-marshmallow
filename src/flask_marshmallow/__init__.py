@@ -84,9 +84,8 @@ class Marshmallow:
     You can declare schema like so::
 
         class BookSchema(ma.Schema):
-            class Meta:
-                fields = ("id", "title", "author", "links")
-
+            id = ma.Integer(dump_only=True)
+            title = ma.String(required=True)
             author = ma.Nested(AuthorSchema)
 
             links = ma.Hyperlinks(

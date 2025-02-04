@@ -119,7 +119,7 @@ class URLFor(fields.Field):
                     param_values[name] = attribute_value
                 else:
                     raise AttributeError(
-                        f"{attr_name!r} is not a valid " f"attribute of {obj!r}"
+                        f"{attr_name!r} is not a valid attribute of {obj!r}"
                     )
             else:
                 param_values[name] = attr_tpl
